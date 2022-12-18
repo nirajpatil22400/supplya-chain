@@ -2,6 +2,7 @@ package com.example.supplychainniraj17dec;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,6 +26,14 @@ public class HelloApplication extends Application {
 
         GridPane gridPane = new GridPane();
 
+        gridPane.setMinSize(bodyPane.getMinWidth(), headerBar-10);
+
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+        gridPane.setStyle("-fx-background-color: #C0C0C0");
+
+        gridPane.setAlignment(Pos.CENTER);
+
         gridPane.add(searchText,0,0);
 
         gridPane.add(searchButton,1,0);
@@ -39,14 +48,22 @@ public class HelloApplication extends Application {
         TextField emailTextField = new TextField();
         PasswordField passwordField = new PasswordField();
 
-        GridPane girdPane = new GridPane();
+        GridPane gridPane = new GridPane();
+        gridPane.setMinSize(bodyPane.getMinWidth(), bodyPane.getMinHeight());
 
-        girdPane.add(emailLabel,0,0);
-        girdPane.add(emailTextField,1,0);
-        girdPane.add(passwordLabel,0,1);
-        girdPane.add(passwordField,1,1);
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+        gridPane.setStyle("-fx-background-color: #C0C0C0");
 
-        return girdPane;
+        gridPane.setAlignment(Pos.CENTER);
+
+
+        gridPane.add(emailLabel,0,0);
+        gridPane.add(emailTextField,1,0);
+        gridPane.add(passwordLabel,0,1);
+        gridPane.add(passwordField,1,1);
+
+        return gridPane;
     }
 
     private Pane createContent(){
