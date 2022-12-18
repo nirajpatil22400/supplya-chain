@@ -111,3 +111,4 @@ public class SupplyChain extends Application {
     }
 }
 //niraj patil
+//supply chain project it for amazon product inventry
