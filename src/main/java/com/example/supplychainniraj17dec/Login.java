@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 
 public class Login {
     public boolean customerLogin(String email, String password){
-        String query = String.format(" SELECT * FROM customer WHERE email = '%s' AND password = '%s' ");
+        String query = String.format(" SELECT * FROM customer WHERE email = '%s' AND password = '%s' ",email,password);
         try{
             DatabaseConnection dbCon = new DatabaseConnection();
             ResultSet rs = dbCon.getQueryTable(query);
@@ -15,5 +15,10 @@ public class Login {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void main(String[] args){
+        Login login = new Login();
+        System.out.println(login.customerLogin("niraj@gmail.com","niraj123"));
     }
 }
