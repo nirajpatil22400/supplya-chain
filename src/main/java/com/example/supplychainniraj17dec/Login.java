@@ -47,10 +47,10 @@ public class Login {
 //        System.out.println(login.customerLogin("niraj@gmail.com","niraj123"));
 //    }
 
-    public static void main(String[] args){
-        Login login = new Login();
-        System.out.println(login.getEncryptedPassword("abc123"));
-    }
+//    public static void main(String[] args){
+//        Login login = new Login();
+//        System.out.println(login.getEncryptedPassword("abc123"));
+//    }
 
 
 }
