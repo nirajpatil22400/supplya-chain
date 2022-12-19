@@ -17,7 +17,7 @@ public class Product {
         return id;
     }
 
-    public Object getName() {
+    public String getName() {
         return name.get();
     }
 
