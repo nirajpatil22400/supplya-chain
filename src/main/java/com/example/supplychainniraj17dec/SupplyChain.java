@@ -134,6 +134,18 @@ public class SupplyChain extends Application {
 
         Button addToCardButton = new Button("Add to Cart");
         Button buyNowButton = new Button("Buy Now");
+        Label messageLabel = new Label("");
+        buyNowButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Product selectedProduct = productDetail.getSelectedProduct();
+                if(Order.placerOrder(customerEmail,selectedProduct)){
+                    messageLabel.setText("Ordered");
+                }else {
+                    messageLabel.setText("Ordered Failed");
+                }
+            }
+        });
 
         GridPane gridPane = new GridPane();
 
@@ -149,6 +161,8 @@ public class SupplyChain extends Application {
         gridPane.add(addToCardButton,0,0);
 
         gridPane.add(buyNowButton,1,0);
+
+        gridPane.add(messageLabel,2,0);
 
         return gridPane;
     }
