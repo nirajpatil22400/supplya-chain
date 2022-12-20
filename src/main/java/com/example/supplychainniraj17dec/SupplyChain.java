@@ -20,12 +20,46 @@ public class SupplyChain extends Application {
     public static final int width = 700 , height = 600 , headerBar = 50;
 
     Pane bodyPane = new Pane();
+
+//    public static int bodyWidth, bodyHeight;
+
     Login login = new Login();
+
     ProductDetail productDetail = new ProductDetail();
+
+    Button globalLoginButton;
+
+    Label customerEmailLabel = null;
+
+    String customerEmail = null;
+
 
     private GridPane headerBar(){
         TextField searchText = new TextField();
         Button searchButton = new Button("Search");
+        searchButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                String productName = searchText.getText();
+                productDetail.getProductsByName(productName);
+                //clear body and put this new pane in the body
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add( productDetail.getProductsByName(productName));
+            }
+        });
+
+        globalLoginButton = new Button("Log In");
+        globalLoginButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                bodyPane.getChildren().clear();
+                bodyPane.getChildren().add(loginPage());
+                globalLoginButton.setDisable(true);
+
+            }
+        });
+
+        customerEmailLabel = new Label("Welcome User");
 
         GridPane gridPane = new GridPane();
 
@@ -33,13 +67,17 @@ public class SupplyChain extends Application {
 
         gridPane.setVgap(5);
         gridPane.setHgap(5);
-//        gridPane.setStyle("-fx-background-color: #C0C0C0");
+//      gridPane.setStyle("-fx-background-color: #C0C0C0");
 
         gridPane.setAlignment(Pos.CENTER);
 
         gridPane.add(searchText,0,0);
 
         gridPane.add(searchButton,1,0);
+
+        gridPane.add(globalLoginButton,2,0);
+
+        gridPane.add(customerEmailLabel,3,0);
 
         return gridPane;
     }
@@ -61,6 +99,11 @@ public class SupplyChain extends Application {
 //              messageLabel.setText(email + " $$ " + password);
                 if(login.customerLogin(email,password)){
                     messageLabel.setText("Login Successful");
+                    customerEmail = email;
+                    globalLoginButton.setDisable(true);
+                    customerEmailLabel.setText("Welecome : " + customerEmail);
+                    bodyPane.getChildren().add(productDetail.getAllProducts());
+                    globalLoginButton.setVisible(false);
                 }else {
                     messageLabel.setText("Login Failed");
                 }

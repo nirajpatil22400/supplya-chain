@@ -47,19 +47,40 @@ public class Product {
 
     public static ObservableList<Product> getAllProducts(){
         DatabaseConnection databaseConnection = new DatabaseConnection();
-        ObservableList<Product> producrList = FXCollections.observableArrayList();
+        ObservableList<Product> productList = FXCollections.observableArrayList();
         String selectProducts = "SELECT * FROM product";
         try{
             ResultSet rs = databaseConnection.getQueryTable(selectProducts);
             while (rs.next()){
-                producrList.add(new Product(rs.getInt("product_id"),
+                productList.add(new Product(rs.getInt("product_id"),
                         rs.getString("name"),rs.getDouble("prize")
                 ));
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return producrList;
+        return productList;
+    }
+
+    public static ObservableList<Product> getProductByName(String productName){
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        ObservableList<Product> productList = FXCollections.observableArrayList();
+        String selectProducts = String.format(" SELECT * FROM product WHERE lower(name) like '%%%s%%' " ,
+                productName.toLowerCase());
+        try{
+            ResultSet rs = databaseConnection.getQueryTable(selectProducts);
+            while (rs.next()){
+                productList.add(
+                        new Product(
+                        rs.getInt("product_id"),
+                        rs.getString("name"),
+                        rs.getDouble("prize")
+                ));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return productList;
     }
 
 
