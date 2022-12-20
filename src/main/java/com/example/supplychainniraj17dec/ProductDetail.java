@@ -18,16 +18,18 @@ public class ProductDetail {
         TableColumn prize = new TableColumn("Prize");
         prize.setCellValueFactory(new PropertyValueFactory<>("prize"));
 
-        ObservableList<Product> data = FXCollections.observableArrayList();
+        /*ObservableList<Product> data = FXCollections.observableArrayList();
         data.add(new Product(1,"Lenovo",8439));
-        data.add(new Product(2,"HP",8590));
+        data.add(new Product(2,"HP",8590));*/
+        ObservableList<Product> products = Product.getAllProducts();
 
         productTable = new TableView<>();
-        productTable.setItems(data);
+        productTable.setItems(products);
         productTable.getColumns().addAll(id,name,prize);
 
         Pane tablePane = new Pane();
         tablePane.getChildren().add(productTable);
         return tablePane;
     }
+
 }

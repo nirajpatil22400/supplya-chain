@@ -1,8 +1,14 @@
 package com.example.supplychainniraj17dec;
 
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+
+import java.sql.ResultSet;
 
 public class Product {
     private SimpleIntegerProperty id;
@@ -38,4 +44,23 @@ public class Product {
         this.name = new SimpleStringProperty(name);
         this.prize = new SimpleDoubleProperty(prize);
     }
+
+    public static ObservableList<Product> getAllProducts(){
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        ObservableList<Product> producrList = FXCollections.observableArrayList();
+        String selectProducts = "SELECT * FROM product";
+        try{
+            ResultSet rs = databaseConnection.getQueryTable(selectProducts);
+            while (rs.next()){
+                producrList.add(new Product(rs.getInt("product_id"),
+                        rs.getString("name"),rs.getDouble("prize")
+                ));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return producrList;
+    }
+
+
 }
