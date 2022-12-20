@@ -130,10 +130,33 @@ public class SupplyChain extends Application {
         return gridPane;
     }
 
+    private GridPane footerBar(){
+
+        Button addToCardButton = new Button("Add to Cart");
+        Button buyNowButton = new Button("Buy Now");
+
+        GridPane gridPane = new GridPane();
+
+        gridPane.setMinSize(bodyPane.getMinWidth(), headerBar-10);
+
+        gridPane.setVgap(5);
+        gridPane.setHgap(50);
+//      gridPane.setStyle("-fx-background-color: #C0C0C0");
+
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setTranslateY(headerBar+height+5);
+
+        gridPane.add(addToCardButton,0,0);
+
+        gridPane.add(buyNowButton,1,0);
+
+        return gridPane;
+    }
+
     private Pane createContent(){
         Pane root = new Pane();
 
-        root.setPrefSize(width,height+headerBar);
+        root.setPrefSize(width,height+2*headerBar+10);
 
         bodyPane.setMinSize(width,height);
 
@@ -141,7 +164,7 @@ public class SupplyChain extends Application {
 
         bodyPane.getChildren().addAll(productDetail.getAllProducts());
 
-        root.getChildren().addAll(headerBar(),bodyPane);
+        root.getChildren().addAll(headerBar(),bodyPane,footerBar());
 
         return  root;
     }
